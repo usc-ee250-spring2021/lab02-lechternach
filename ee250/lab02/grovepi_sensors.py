@@ -57,7 +57,7 @@ if __name__ == '__main__':
             setRGB(0,64,128)
             objStatus = "OBJ PRES"
         else:
-           setRGB(128,0,0)
+            setRGB(128,0,0)
             objStatus = "        "
 
         # Update LCD
