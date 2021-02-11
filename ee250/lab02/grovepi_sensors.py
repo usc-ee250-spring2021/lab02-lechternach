@@ -54,10 +54,10 @@ if __name__ == '__main__':
         # Determine if object is present
         objStatus = ""
         if distance < threshold:
-            setRGB(0,64,128)
+            grovepi.setRGB(0,64,128)
             objStatus = "OBJ PRES"
         else:
-            setRGB(128,0,0)
+            grovepi.setRGB(128,0,0)
             objStatus = "        "
 
         # Update LCD
