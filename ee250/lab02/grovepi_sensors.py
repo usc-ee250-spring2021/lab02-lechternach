@@ -1,8 +1,10 @@
 """ EE 250L Lab 02: GrovePi Sensors
 
 List team members here.
+Lucas Echternach
 
 Insert Github repository link here.
+https://github.com/usc-ee250-fall2021/lab02-lechternach
 """
 
 """python3 interpreters in Ubuntu (and other linux distros) will look in a 
@@ -23,16 +25,38 @@ sys.path.append('../../Software/Python/')
 sys.path.append('../../Software/Python/grove_rgb_lcd')
 
 import grovepi
+from grove_rgb_lcd import *
 
 """This if-statement checks if you are running this python file directly. That 
 is, if you run `python3 grovepi_sensors.py` in terminal, this if-statement will 
 be true"""
 if __name__ == '__main__':
-    PORT = 4    # D4
+    ultrasensor = 4    # D4
+    potentiometer = 2 #A2
+    grovepi.pinMode(potentiometer,"INPUT")
+
+    #Turn on LCD backlights
+    setRGB(63,63,63)
+
+    time.sleep(1)
 
     while True:
         #So we do not poll the sensors too quickly which may introduce noise,
         #sleep for a reasonable time of 200ms between each iteration.
         time.sleep(0.2)
 
-        print(grovepi.ultrasonicRead(PORT))
+        #Read resistance from potentiometer
+        threshold = grovepi.analogRead(potentiometer)
+
+        #Read distance from Ultrasonic Ranger
+        distance = grovepi. ultrasonicRead(ultrasensor)
+
+        # Determine if object is present
+        objStatus = ""
+        if distance < threshold:
+            objStatus = "OBJ PRES"
+        else:
+            objStatus = "        "
+
+        # Update LCD
+        setText_norefresh("%4dcm %s\n %3dcm" % (threshold,objStatus,distance))
