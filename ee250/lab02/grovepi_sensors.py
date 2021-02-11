@@ -25,7 +25,7 @@ sys.path.append('../../Software/Python/')
 sys.path.append('../../Software/Python/grove_rgb_lcd')
 
 import grovepi
-from grove_rgb_lcd import *
+#from grove_rgb_lcd import *
 
 """This if-statement checks if you are running this python file directly. That 
 is, if you run `python3 grovepi_sensors.py` in terminal, this if-statement will 
@@ -36,7 +36,7 @@ if __name__ == '__main__':
     grovepi.pinMode(potentiometer,"INPUT")
 
     #Turn on LCD backlights
-    setRGB(63,63,63)
+    setRGB(0,64,128)
 
     time.sleep(1)
 
@@ -54,8 +54,10 @@ if __name__ == '__main__':
         # Determine if object is present
         objStatus = ""
         if distance < threshold:
+            setRGB(0,64,128)
             objStatus = "OBJ PRES"
         else:
+            setRGB(128,0,0)
             objStatus = "        "
 
         # Update LCD
